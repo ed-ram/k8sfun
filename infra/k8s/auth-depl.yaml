@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-depl
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
         app: auth
-      template:
-        metadata:
-          labels:
-            app: auth
-        spec:
-          containers:
-            - name: auth
-              image: edrmg/ticketing/auth 
+    spec:
+      containers:
+        - name: auth
+          image: edrmg/ticketing/auth 
 ---
 apiVersion: v1
 kind: Service
@@ -28,4 +28,3 @@ spec:
       protocol: TCP
       port: 3000
       targetPort: 3000
-# Note no type specified - defaults to cluster ip
